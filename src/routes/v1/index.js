@@ -9,4 +9,7 @@ const router = express.Router();
 
 router.post('/signup',middlewareFunctions.CreateValidateUser,userController.create);
 
+router.get('/user/:id',userController.get);
+
+
 module.exports = router;
