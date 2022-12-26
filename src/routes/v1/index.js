@@ -11,5 +11,7 @@ router.post('/signup',middlewareFunctions.CreateValidateUser,userController.crea
 
 router.get('/user/:id',userController.get);
 
+router.post('/signin',userController.SignIn);
+
 
 module.exports = router;
