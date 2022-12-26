@@ -1,4 +1,7 @@
 const UserRepository = require("../repository/user-repository");
+const jwt = require('jsonwebtoken');
+
+const {JWT_KEY} = require('../config/serverConfig');
 
 class UserService {
   constructor() {
@@ -39,6 +42,27 @@ class UserService {
       
     }
   }
+
+
+  createToken(user)
+  {
+
+try {
+  
+  const token = jwt.sign(user,JWT_KEY);
+
+  console.log(token);
+  
+} catch (error) {
+
+  console.log('something went wrong in the token creation');
+  throw {error};
+  
+}
+
+  }
+
+
 }
 
 module.exports = UserService;
