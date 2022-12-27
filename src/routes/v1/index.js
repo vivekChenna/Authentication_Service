@@ -15,5 +15,7 @@ router.post('/signin',middlewareFunctions.ValidateUserAuth,userController.SignIn
 
 router.get('/isAuthenticated',userController.isAuthenticated);
 
+router.get('/isAdmin',middlewareFunctions.ValidateIsAdminRequest,userController.isAdmin);
+
 
 module.exports = router;

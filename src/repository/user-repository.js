@@ -64,12 +64,28 @@ class UserRepository {
   }
 
 
-  async Auth(userId){
+  async isAdmin(userId){
 
+try {
 
-    const user = await User.findByPk(userId);
+  
+  const user = await User.findByPk(userId);
+  const AdminRole = await Role.findOne({
+    where : {
+      name : 'ADMIN',
+    },
 
-    const role = await Role.findByPk(1);
+  });
+
+   return user.hasRole(AdminRole);
+
+  
+} catch (error) {
+  
+  console.log('something went wrong in the repository layer');
+   throw {error};
+}
+        
 
 
 

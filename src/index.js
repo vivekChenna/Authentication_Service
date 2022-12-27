@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 const { PORT, JWT_KEY } = require('./config/serverConfig');
 
-const {User ,Role} = require('./models/index');
 
 const db = require('./models/index');
 
@@ -40,14 +39,14 @@ const prepareAndStartServer = async() => {
     db.sequelize.sync({alter:true});
   }
 
-  const user1 = await User.findByPk(2);
-  const role1 = await Role.findByPk(1);
+  // const user1 = await User.findByPk(2);
+  // const role1 = await Role.findByPk(1);
 
-  user1.addRole(role1);
+  // user1.addRole(role1);
 
-  const response = await user1.hasRole(role1);
+  // const response = await user1.hasRole(role1);
 
-  console.log(response);
+  // console.log(response);
 
 
 
