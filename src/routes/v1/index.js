@@ -7,11 +7,13 @@ const express = require("express");
 const router = express.Router();
 
 
-router.post('/signup',middlewareFunctions.CreateValidateUser,userController.create);
+router.post('/signup',middlewareFunctions.ValidateUserAuth,userController.create);
 
 router.get('/user/:id',userController.get);
 
-router.post('/signin',userController.SignIn);
+router.post('/signin',middlewareFunctions.ValidateUserAuth,userController.SignIn);
+
+router.get('/isAuthenticated',userController.isAuthenticated);
 
 
 module.exports = router;
