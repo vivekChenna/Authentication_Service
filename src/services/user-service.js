@@ -15,10 +15,9 @@ class UserService {
       const user = await this.userRepository.createUser(data);
       return user;
     } catch (error) {
-
-      if(error.name='SequelizeValidationError'){
+      if ((error.name = "SequelizeValidationError")) {
         throw error;
-            }
+      }
       console.log("something went wrong in the service layer");
       throw error;
     }
@@ -39,12 +38,12 @@ class UserService {
       // step1 -> fetch the user using email
       const user = await this.userRepository.getByEmail(email);
 
-      if (!user) {
-        throw {
-          error: "email not registered ",
-          message: "please first signup ",
-        };
-      }
+      // if (!user) {
+      //   throw {
+      //     error: "email not registered ",
+      //     message: "please first signup ",
+      //   };
+      // }
 
       // step2 -> compare incoming password with the stored encrypted password
       const PasswordMatch = this.checkPassword(PlainPassword, user.password);
@@ -62,6 +61,14 @@ class UserService {
 
       return newJWT;
     } catch (error) {
+
+      
+    if(error.name='AttributeNotFound'){
+
+      throw error;
+      
+    }
+
       console.log("something went wrong in the Sign in process");
       throw { error };
     }
@@ -83,12 +90,11 @@ class UserService {
 
       console.log(user);
 
-      if(!user){
-        throw {error : "No user with the corresponding token exist "}
+      if (!user) {
+        throw { error: "No user with the corresponding token exist " };
       }
 
       return user.id;
-
     } catch (error) {
       console.log("something went wrong in the auth process");
       throw { error };
@@ -140,20 +146,14 @@ class UserService {
     }
   }
 
-   async isAdmin(userId)
-   {
-
+  async isAdmin(userId) {
     try {
-
       return this.userRepository.isAdmin(userId);
-      
     } catch (error) {
-      console.log('something went wrong in the service layer');
-      throw {error};
-      
+      console.log("something went wrong in the service layer");
+      throw { error };
     }
-
-   }
+  }
 }
 
 module.exports = UserService;

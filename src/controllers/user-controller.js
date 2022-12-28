@@ -81,12 +81,12 @@ const SignIn = async (req, res) => {
       message: "User signed in successfully",
     });
   } catch (error) {
-    console.log(error);
-    res.status(501).json({
+    // console.log(error)
+    res.status(error.statusCode).json({
       data: {},
       success: false,
-      message: "failed to Sign in",
-      err: { error },
+      message: error.message,
+      err: error.explanation ,
     });
   }
 };
